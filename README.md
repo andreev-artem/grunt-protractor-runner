@@ -3,7 +3,7 @@
 > A Grunt plugin for running [Protractor](https://github.com/angular/protractor) runner.
 
 ## Getting Started
-This plugin requires Grunt `~0.4.1` and Protractor `>=0.14.0-0 <1.0.0`
+This plugin requires Grunt `~0.4.1` and Protractor `1.x.x`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
@@ -56,7 +56,7 @@ A protractor config file.
 
 #### options.keepAlive
 Type: `Boolean`
-Default value: `true`
+Default value: `false` (`true` before v1.0.0)
 
 If true, grunt process continues even if the test fails. This option is useful when using with grunt watch.
 If false, grunt process stops when the test fails.
@@ -87,6 +87,8 @@ Supported arguments are below.
 * baseUrl `string`: URL to prepend to all relative paths
 * rootElement `string`: Element housing ng-app, if not html or body
 * specs `array`: Array of spec files to test. Ex. `["spec1.js","spec2.js"]`
+* exclude `array`: Array of files to exclude from testing. Ex. `["spec2.js"]`
+* suite `string`: Name of test suite to run
 * includeStackTrace `boolean`: Print stack trace on error
 * verbose `boolean`: Print full spec names
 * browser `string`: Browser name, e.g. chrome or firefox
@@ -98,6 +100,7 @@ Supported arguments are below.
 * capabilities `object`: Capabilities object to be passed to the test, e.g. browserName, platform and version
 * framework `string`: Limited support for using mocha as the test framework instead of jasmine.
 * cucumberOpts `object`: Cucumber framework options object to be passed to the test, e.g. require, tags and format
+* mochaOpts `object`: Mocha test framework options object to be passed
 
 ## Tests
 
@@ -107,7 +110,6 @@ Then run `grunt` or `npm test` to test the module. You will encounter these.
 
 * It opens chrome a couple of times without warnings or errors.
 * A test task fails but the test process keeps alive and continues to the next test tasks.
-* It will launch the node debugger. You'll need to enter c a few times to progress through a few breakpoints, and then when it succeed, press Ctrl-c 2 times to exit the debugger to continue other test tasks.
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
@@ -122,11 +124,22 @@ In case you want to use the plugin with the global installed protractor command.
 
 * Remove local install protractor by `rm -rf node_modules/protractor`
 * Install `protractor` globally  with `npm install -g protractor`
-* Make sure that node can resolve the module with `require()` mechanism. See [Module loding from the global folders](http://nodejs.org/api/modules.html#modules_loading_from_the_global_folders) for more information.
+* Make sure that node can resolve the module with `require()` mechanism. See [Module loading from the global folders](http://nodejs.org/api/modules.html#modules_loading_from_the_global_folders) for more information.
 * Run `webdriver-manager update` to install/update selenium driver for global install protractor.
 
 ## Release History
 
+* 1.1.0
+  * Update protractor to version 1.x.x
+* 1.0.1
+  * Pass specified command line params to the subprocess (#68)
+  * Make npm test to run and handle interactive debugger by itself (#66)
+  * Fixed argsTest
+* 1.0.0
+  * Change default value of `options.keepAlive` to false (#50)
+
+* 0.2.5
+  * Support --mochaOpts, --suite and --exclude in options.args (#52, #53, #57)
 * 0.2.4
   * Support --cucumberOpts in options.args (#46)
 * 0.2.3

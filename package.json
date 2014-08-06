@@ -1,7 +1,7 @@
 {
   "name": "grunt-protractor-runner",
   "description": "A Grunt plugin for running protractor runner.",
-  "version": "0.2.4",
+  "version": "1.1.0",
   "homepage": "https://github.com/teerapap/grunt-protractor-runner",
   "author": {
     "name": "Teerapap Changwichukarn",
@@ -26,12 +26,13 @@
   },
   "scripts": {
     "postinstall": "node ./node_modules/protractor/bin/webdriver-manager update",
-    "test": "grunt test"
+    "test": "node test/runtest.js"
   },
   "dependencies": {
-    "protractor": ">=0.14.0-0 <1.0.0"
+    "protractor": "^1.0.0"
   },
   "devDependencies": {
+    "nexpect": "~0.4.0",
     "grunt-contrib-jshint": "~0.6.0",
     "grunt-contrib-clean": "~0.4.0",
     "grunt-contrib-nodeunit": "~0.2.0",
